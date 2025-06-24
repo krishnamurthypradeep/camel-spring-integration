@@ -5,7 +5,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JaxbDataFormat;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class FileToActiveMQAndXMLToJSON  extends RouteBuilder {
 
     @Override
@@ -17,8 +17,11 @@ public class FileToActiveMQAndXMLToJSON  extends RouteBuilder {
                 .unmarshal(format)
                 .marshal().json()
                  .log(" contents:\n ${bodyAs(String)}").
-                to("activemq:queue:products");
+                to("jms1:queue:productsA","jms1:queue:productsB");
     }
 }
+// camel-spring-boot-activemq-starter
+// JMSComponent ("jms")
+// ActiveMQComponent ("activemq")
 
 // 460 Components

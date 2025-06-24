@@ -8,7 +8,7 @@ public class FirstRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("file:data/input?noop=true&recursive=true")
+        from("file:data/input?noop=true&recursive=true&initialDelay=2000&delay=5000&include=.*\\.txt$")
                 .log("File ${header:CamelFileName} contents:\n ${bodyAs(String)}")
                 .to("file:data/output?noop=true");
     }
