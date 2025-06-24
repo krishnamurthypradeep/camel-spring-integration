@@ -6,7 +6,7 @@
          http://www.springframework.org/schema/beans           https://www.springframework.org/schema/beans/spring-beans.xsd
          http://camel.apache.org/schema/spring                 https://camel.apache.org/schema/spring/camel-spring.xsd">
 
-    <camel:camelContext id="caml">
+    <camel:camelContext id="camel">
         <camel:route id="xml-file-to-log">
             <camel:from uri="file:data/input?noop=true&amp;recursive=true"/>
             <camel:log message="(XML) ${file:name}: ${body}"/>

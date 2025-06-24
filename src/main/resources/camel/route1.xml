@@ -1,0 +1,10 @@
+
+
+
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route id="xml-file-to-log">
+        <from uri="file:data/input?noop=true&amp;recursive=true"/>
+        <log message="(XML) ${file:name}: ${body}"/>
+        <to uri="file:data/output"/>
+    </route>
+</routes>
