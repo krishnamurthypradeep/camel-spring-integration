@@ -120,6 +120,22 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-avro-starter</artifactId>
+
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-avro</artifactId>
+
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-jackson-avro-starter</artifactId>
+
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-jacksonxml-starter</artifactId>
 
 		</dependency>
@@ -261,6 +277,10 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-activemq-starter</artifactId>
 		</dependency>
@@ -307,6 +327,57 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.avro</groupId>
+				<artifactId>avro-maven-plugin</artifactId>
+				<version>1.11.1</version>
+				<executions>
+					<execution>
+						<id>generate-avro-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<!-- generate Java from schemas -->
+							<goal>schema</goal>
+						</goals>
+						<configuration>
+							<!-- where your .avsc files live -->
+							<sourceDirectory>${project.basedir}/src/main/avro</sourceDirectory>
+							<!-- where to put the generated Java -->
+							<imports>
+								<import>${project.basedir}/src/main/avro/Status.avsc</import>
+							</imports>
+							<includes>
+								<include>Order.avsc</include>
+							</includes>
+							<outputDirectory>${project.build.directory}/generated-sources/avro</outputDirectory>
+							<!-- use java.lang.String for Avro strings -->
+							<stringType>String</stringType>
+							<dateTimeLogicalTypeImplementation>jsr310</dateTimeLogicalTypeImplementation>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- tell Maven to compile the generated sources -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.4.0</version>
+				<executions>
+					<execution>
+						<id>add-avro-generated-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/avro</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 

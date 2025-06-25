@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-@Component
+//@Component
 public class XSLTExpressionLanguageRouter extends RouteBuilder {
     @Override
     public void configure() throws Exception {
@@ -28,3 +28,17 @@ public class XSLTExpressionLanguageRouter extends RouteBuilder {
 // ApplicationContextRegistry
 // OsgiServiceRegistry
 // CdiBeanRegistry
+
+// Data Formats provided with camel
+
+// XML
+// JSON
+// CSV
+// Bindy
+// Avro -> Binary Format
+// ProtoBuf
+// Gzip
+// JAXB
+// Crypto
+// HL7
+

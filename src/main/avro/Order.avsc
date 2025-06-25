@@ -1,0 +1,11 @@
+{
+"namespace":"com.myapp.camel.avro",
+"type":"record",
+"name":"Order",
+"fields":[
+{"name":"orderId","type":"string"},
+{"name":"price","type":"double"},
+{"name":"city","type":"string"},
+{"name":"status","type":"Status"}
+]
+}

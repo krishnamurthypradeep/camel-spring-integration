@@ -1,0 +1,6 @@
+{
+"namespace":"com.myapp.camel.avro",
+"type":"enum",
+"name":"Status",
+"symbols":["PENDING","DELIVERED"]
+}
