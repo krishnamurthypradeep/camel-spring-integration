@@ -3,7 +3,25 @@ package com.myapp.camel.routes;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
+// ExpressionLanguages
+// camel-core
+// Simple
+// File (File Related Headers ${file:ext}
+// starter kits
+// JSONPath (Navigate JSON documents)
+// XPath evaluate xpath on xml
+// XQuery
+
+
+// EndPoints
+// Components
+// File
+// Ftp
+// SQL (Jdbc | Jpa)
+// ExpressionLanguage
+// Enterprise Integration Pattern
+
 public class Vetro extends RouteBuilder {
     @Override
     public void configure() throws Exception {

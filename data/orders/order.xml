@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<orders>
+    <lineItems>
+<product>
+    <name>Iphone16Pro</name>
+    <price>85000.5</price>
+    <brand>Apple</brand>
+    <description>Iphone16Pro</description>
+</product>
+        <product>
+            <name>Iphone16Pro</name>
+            <price>85000.5</price>
+            <brand>Apple</brand>
+            <description>Iphone16Pro</description>
+        </product>
+    </lineItems>
+</orders>

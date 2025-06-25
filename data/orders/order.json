@@ -1,0 +1,20 @@
+{
+  "orders":
+{
+"lineItems":[
+  {
+    "name": "Iphone16",
+    "brand":"Apple",
+    "description": "Iphone16Pro",
+    "price": 75456.5
+  },
+  {
+    "name": "Oneplus",
+    "brand":"Oneplus",
+    "description": "Oneplus13Pro",
+    "price": 65456.5
+  }
+]
+
+}
+}

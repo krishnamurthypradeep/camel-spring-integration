@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
-    @Bean()
-    ActiveMQConnectionFactory activeMQConnectionFactory1(){
-        return new ActiveMQConnectionFactory("tcp://localhost:61616");
-    }
+//    @Bean()
+//    ActiveMQConnectionFactory activeMQConnectionFactory1(){
+//        return new ActiveMQConnectionFactory("tcp://localhost:61616");
+//    }
 
     @Bean("myJms")
     JmsComponent jmsComponent(ConnectionFactory connectionFactory){
