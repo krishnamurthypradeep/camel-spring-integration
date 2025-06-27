@@ -1,5 +1,7 @@
 {
   "orderId": "A123",
   "price": 56456.6,
-"city":"Bengaluru"
+"city":"Bengaluru",
+  "status": "DELIVERED",
+  "orderDate" : "2025-06-25"
 }

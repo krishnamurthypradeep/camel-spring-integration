@@ -104,6 +104,15 @@
 			<artifactId>camel-spring-boot-starter</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 
 
 		<dependency>
@@ -131,6 +140,12 @@
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-jackson-avro-starter</artifactId>
+
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-leveldb</artifactId>
 
 		</dependency>
 
@@ -190,8 +205,9 @@
 
 
 		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
 
 		</dependency>
 
@@ -307,6 +323,19 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.17.1</version> <!-- Use your Jackson version -->
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-avro</artifactId>
+		</dependency>
 
 
 
@@ -324,59 +353,80 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.avro</groupId>
 				<artifactId>avro-maven-plugin</artifactId>
-				<version>1.11.1</version>
+				<version>1.11.3</version> <!-- or latest -->
 				<executions>
 					<execution>
-						<id>generate-avro-sources</id>
 						<phase>generate-sources</phase>
 						<goals>
-							<!-- generate Java from schemas -->
 							<goal>schema</goal>
 						</goals>
 						<configuration>
-							<!-- where your .avsc files live -->
-							<sourceDirectory>${project.basedir}/src/main/avro</sourceDirectory>
-							<!-- where to put the generated Java -->
-							<imports>
-								<import>${project.basedir}/src/main/avro/Status.avsc</import>
-							</imports>
-							<includes>
-								<include>Order.avsc</include>
-							</includes>
-							<outputDirectory>${project.build.directory}/generated-sources/avro</outputDirectory>
-							<!-- use java.lang.String for Avro strings -->
 							<stringType>String</stringType>
-							<dateTimeLogicalTypeImplementation>jsr310</dateTimeLogicalTypeImplementation>
+							<enableDecimalLogicalType>true</enableDecimalLogicalType>
+							<fieldVisibility>PRIVATE</fieldVisibility>
+
+							<sourceDirectory>${project.basedir}/src/main/avro</sourceDirectory>
+							<outputDirectory>${project.build.directory}/generated-sources/avro</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-			<!-- tell Maven to compile the generated sources -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>3.4.0</version>
-				<executions>
-					<execution>
-						<id>add-avro-generated-sources</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>${project.build.directory}/generated-sources/avro</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--			</plugin>-->
+<!--			<plugin>-->
+<!--				<groupId>org.apache.avro</groupId>-->
+<!--				<artifactId>avro-maven-plugin</artifactId>-->
+<!--				<version>1.11.1</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>generate-avro-sources</id>-->
+<!--						<phase>generate-sources</phase>-->
+<!--						<goals>-->
+<!--							&lt;!&ndash; generate Java from schemas &ndash;&gt;-->
+<!--							<goal>schema</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							&lt;!&ndash; where your .avsc files live &ndash;&gt;-->
+<!--							<sourceDirectory>${project.basedir}/src/main/avro</sourceDirectory>-->
+<!--							&lt;!&ndash; where to put the generated Java &ndash;&gt;-->
+<!--							<imports>-->
+<!--								<import>${project.basedir}/src/main/avro/Status.avsc</import>-->
+<!--							</imports>-->
+<!--							<includes>-->
+<!--								<include>Order.avsc</include>-->
+<!--							</includes>-->
+<!--							<outputDirectory>${project.build.directory}/generated-sources/avro</outputDirectory>-->
+<!--							&lt;!&ndash; use java.lang.String for Avro strings &ndash;&gt;-->
+<!--							<stringType>String</stringType>-->
+<!--							<dateTimeLogicalTypeImplementation>jsr310</dateTimeLogicalTypeImplementation>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+<!--			&lt;!&ndash; tell Maven to compile the generated sources &ndash;&gt;-->
+<!--			<plugin>-->
+<!--				<groupId>org.codehaus.mojo</groupId>-->
+<!--				<artifactId>build-helper-maven-plugin</artifactId>-->
+<!--				<version>3.4.0</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>add-avro-generated-sources</id>-->
+<!--						<phase>generate-sources</phase>-->
+<!--						<goals>-->
+<!--							<goal>add-source</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<sources>-->
+<!--								<source>${project.build.directory}/generated-sources/avro</source>-->
+<!--							</sources>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 
 		</plugins>
 	</build>

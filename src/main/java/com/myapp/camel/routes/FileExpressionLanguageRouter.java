@@ -22,3 +22,37 @@ public class FileExpressionLanguageRouter extends RouteBuilder {
 
     }
 }
+
+// Spring Integration
+
+// Messaging Channels
+
+// Message Channel from().to()
+
+// Point To Point Channel from("myJms:queue:avroqueue").bean("","")
+
+// Queue (PTP) & Topic (Publish Subscribe)
+// from("myJms:topic:avrotopic").to("","")
+
+// GOF
+
+// Messaging Channels (Messaging Channels,PointToPointChannel,PublishScubscribeChannel)
+
+// Message Construction (Message, CommandMessage, DocumentMessage,EventMessage)
+
+// from(
+
+
+// Message Transformation
+// Message Translator
+// ContentEnricher
+// Content Filter
+// XSL Transformations
+// ContentBasedRouter choice() when()
+// Aggregator
+// Splitter
+// RoutingSlip
+// DynamicRouter
+
+// LoadBalancer
+// ErrorHandlingPatterns
